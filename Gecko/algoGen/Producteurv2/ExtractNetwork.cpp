@@ -80,7 +80,7 @@ public:
 		boost::split(contentSeq, p_seq, boost::is_any_of(","));
 		sort(contentSeq.begin(), contentSeq.end());
 		string result = contentSeq[0];
-		for (uint i = 1; i < contentSeq.size(); i++) {
+		for (uint64_t i = 1; i < contentSeq.size(); i++) {
 			result += "," + contentSeq[i];
 		}
 		return result;
@@ -97,9 +97,9 @@ public:
 		vector<string> contentSeq;
 		boost::split(contentSeq, p_seq, boost::is_any_of(","));
 
-		for (uint i = 0; i < contentSeq.size(); i++) {
+		for (uint64_t i = 0; i < contentSeq.size(); i++) {
 			string id1 = contentSeq[i];
-			for (uint j = i + 1; j < contentSeq.size(); j++) {
+			for (uint64_t j = i + 1; j < contentSeq.size(); j++) {
 
 				string id2 = contentSeq[j];
 				vector<string> tmp;

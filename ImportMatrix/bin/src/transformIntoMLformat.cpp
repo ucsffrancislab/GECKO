@@ -39,7 +39,7 @@ int main(int argc, char* argv[]){
     bool breakmaxsize=false;
     bool firstwriting=true;
     bool gotline=true;
-    uint linecount=0;
+    uint64_t linecount=0;
 
     string line;
     /*!
@@ -73,7 +73,7 @@ int main(int argc, char* argv[]){
                 boost::split(content, line, boost::is_any_of("\t"));
                 _Kmerid.push_back(content[0]);
                 vector<float> tmpdata;
-                for(uint igroup = 1; igroup<content.size(); igroup++){
+                for(uint64_t igroup = 1; igroup<content.size(); igroup++){
                     tmpdata.push_back(stof(content[igroup],NULL));
                 }
                 _Data.push_back(tmpdata);

@@ -83,7 +83,7 @@ C_DEPS += \
 ./cephes/%.o: ./cephes/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C Compiler'
-	gcc -std=c11 -O3 -Wall -fopenmp -c -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	gcc ${CFLAGS} ${LDFLAGS} -std=c11 -O3 -Wall -fopenmp -c -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
@@ -104,7 +104,7 @@ CPP_DEPS += \
 ./%.o: ./%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -std=c++14 -O3 -fopenmp -c -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ ${CPPFLAGS} ${LDFLAGS} -std=c++14 -O3 -fopenmp -c -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
@@ -114,7 +114,7 @@ CPP_DEPS += \
 all:  $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -fopenmp -o "anovaFilter" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ ${CPPFLAGS} ${LDFLAGS} -fopenmp -o "anovaFilter" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
