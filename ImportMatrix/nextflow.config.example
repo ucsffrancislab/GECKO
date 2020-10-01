@@ -39,6 +39,11 @@ dag {
   file = "${params.outdir}/pipeline_info/geckoMatrix_DAG.svg"
 }
 
+// This is nice. Can run directly on n38 without running out of processes
+executor{
+  queueSize=20
+}
+
 
 process{
     //executor = 'slurm'

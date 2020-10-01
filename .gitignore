@@ -15,6 +15,7 @@
 /ImportMatrix/bin/transformIntoML
 /ImportMatrix/demo_import/
 /ImportMatrix/nextflow
+/ImportMatrix/nextflow.config
 /ImportMatrix/results/
 /ImportMatrix/work/
 /Demo/*.fastq
