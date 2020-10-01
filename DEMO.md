@@ -71,6 +71,7 @@ Install fastq-dump from sra-tools
 Download demo data and compile first, then process.
 
 
+
 ```
 cd ~/github/ucsffrancislab/GECKO
 
@@ -149,6 +150,8 @@ Change paths in ../Demo/microRNA_demo.conf
 
 
 ```
+cp ../Demo/microRNA_demo.conf.example ../Demo/microRNA_demo.conf
+
 ./main.pl importation --groupconfig ../Demo/microRNA_demo.conf --outdir demo_import
 
 ./main.pl discretization --matrix demo_import/rawimport/matrix/RAWmatrix.matrix –-outdir demo_import
