@@ -6,7 +6,7 @@
 #SBATCH -e voting_%j.err      # File to which STDERR will be written
 
 
-module load system/Python-3.6.3
+#module load system/Python-3.6.3
 
 echo $1 , $2
 
