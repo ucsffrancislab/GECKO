@@ -8,9 +8,9 @@
 #SBATCH -e slurmlogV2/nlyz_%j.err      # File to which STDERR will be written
 #SBATCH --mail-type=ALL         # Type of email notification- BEGIN,END,FAIL,ALL
 #SBATCH --mail-user=sylvain.barriere@igh.cnrs.fr  # Email to which notifications will be sent
-module load cv-standard
+#module load cv-standard
 
-module load python/3.5.2-bz2
+#module load python/3.5.2-bz2
 
 echo $1 , $2, $3 ,$4 ,$5
 
