@@ -186,6 +186,8 @@ mkdir ../../../../ImportMatrix/demo_import/filtering/final/CutMatrix/
 
 
 
+cd ../..
+
 ./prod_client_script_C++_V3.sh ../../Demo/configGA_microRNA_demo.conf 20
 ```
 
@@ -193,6 +195,12 @@ mkdir ../../../../ImportMatrix/demo_import/filtering/final/CutMatrix/
 That seemed to be working but was crushing my laptop so I killed the process.
 
 Next to try on a single isolated node on the cluster.
+
+
+
+TIPCC still doesn't use python3. Trying to downgrade scripts to python2.
+
+[n38:188485] mca_base_component_repository_open: unable to open mca_mtl_psm: libpsm_infinipath.so.1: cannot open shared object file: No such file or directory (ignored)
 
 
 
