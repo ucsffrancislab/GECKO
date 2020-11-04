@@ -6,9 +6,9 @@
 #SBATCH -e GECKO_%j.err      # File to which STDERR will be written
 
 
-module load compiler/gcc-5.3.0
-module load mpi/openmpi-2.1.2
-module load system/Python-3.6.3
+#module load compiler/gcc-5.3.0
+#module load mpi/openmpi-2.1.2
+#module load system/Python-3.6.3
 export OMP_NUM_THREADS=10
 echo $1 $2 $3
 

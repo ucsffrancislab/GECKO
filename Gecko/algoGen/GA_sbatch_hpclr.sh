@@ -8,11 +8,12 @@
 #SBATCH -e slurmlogV2/V2_%j.err      # File to which STDERR will be written
 #SBATCH --mail-type=ALL         # Type of email notification- BEGIN,END,FAIL,ALL
 #SBATCH --mail-user=sylvain.barriere@igh.cnrs.fr  # Email to which notifications will be sent
-module load cv-standard
-#module load python/3.5.2
-module load python/3.5.2-bz2
 
-module load openmpi/psm2/2.0.1
+#module load cv-standard
+##module load python/3.5.2
+#module load python/3.5.2-bz2
+
+#module load openmpi/psm2/2.0.1
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 echo $1 $2 $3
