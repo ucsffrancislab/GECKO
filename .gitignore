@@ -1,3 +1,4 @@
+*.swp
 /ImportMatrix/bin/src/cephes/*.o
 /ImportMatrix/bin/src/cephes/*.d
 /ImportMatrix/.nextflow.log*
@@ -19,7 +20,7 @@
 /ImportMatrix/results/
 /ImportMatrix/work/
 /Demo/*.fastq
-/Demo/DemoGeneticAlgResultDir/
+/Demo/DemoGeneticAlgResultDir*/
 /Demo/microRNA_demo.conf
 /Gecko/algoGen/Producteurv2/farmer2
 /Gecko/algoGen/Producteurv2/farmer2.dSYM/
@@ -29,3 +30,14 @@
 /Gecko/algoGen/Producteurv2/utils/indexBinary.dSYM/
 /Gecko/algoGen/Producteurv2/utils/transformIntoBinary
 /Gecko/algoGen/Producteurv2/utils/transformIntoBinary.dSYM/
+/Gecko/algoGen/*_request
+/Gecko/algoGen/*_response
+/Gecko/algoGen/ClassGeneticAlgPlotter.pyc
+/Gecko/algoGen/mainfold.pyc
+/Gecko/algoGen/smoothsig.pyc
+/Gecko/algoGen/slurm-*.out
+/Gecko/algoGen/GECKO_*.out
+/Gecko/algoGen/GECKO_*.err
+/Gecko/algoGen/__pycache__/
+/Gecko/algoGen/plot_analysis_*.err
+/Gecko/algoGen/plot_analysis_*.out
