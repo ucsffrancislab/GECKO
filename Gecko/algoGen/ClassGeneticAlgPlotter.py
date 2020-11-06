@@ -65,6 +65,9 @@ from numpy.polynomial import Polynomial
 
 
 
+import collections
+
+
 ## @package GeneticAlgPlotter
 #  This class make analysis of genetics algorithms from result file,
 #  and generate graph, output in format png,pdf, and json
@@ -470,14 +473,20 @@ class GeneticAlgPlotter:
             bestIndices = aa.split(',')
             nbkmer=len(df.iloc[0]['bestSequences'].split(','))
             scoresindiv=np.repeat(df['scoremax'],nbkmer)
-            kmercount = pd.DataFrame.from_items([('nview', np.ones(len(bestIndices))),
-                                                 ('bestIndices', bestIndices),('scoreCum', scoresindiv)])
+            #kmercount = pd.DataFrame.from_items([('nview', np.ones(len(bestIndices))),
+            #                                     ('bestIndices', bestIndices),('scoreCum', scoresindiv)])
+            kmercount = pd.DataFrame.from_dict(collections.OrderedDict(
+                                                 [('nview', np.ones(len(bestIndices))),
+                                                 ('bestIndices', bestIndices),('scoreCum', scoresindiv)]))
 
 
             kmercount=kmercount.groupby('bestIndices', as_index=False).sum()
         else:
-            kmercount = pd.DataFrame.from_items([('nview', []),
-                                         ('bestIndices', []), ('scoreCum', [])])
+            #kmercount = pd.DataFrame.from_items([('nview', []),
+            #                             ('bestIndices', []), ('scoreCum', [])])
+            kmercount = pd.DataFrame.from_dict(collections.OrderedDict(
+                                                 [('nview', []),
+                                         ('bestIndices', []), ('scoreCum', [])]))
 
         return kmercount
 
@@ -1136,8 +1145,11 @@ class GeneticAlgPlotter:
                     aa = orgaclust.to_csv(sep=str(u','), index=False)
                     aa = aa.replace('\"\n\"', ',').replace('\"', '').replace('\n', '')
                     bestIndices = aa.split(',')
-                    kmercount = pd.DataFrame.from_items([('nview', np.ones(len(bestIndices))),
-                                                         ('bestIndices', bestIndices), ])
+                    #kmercount = pd.DataFrame.from_items([('nview', np.ones(len(bestIndices))),
+                    #                                     ('bestIndices', bestIndices), ])
+                    kmercount = pd.DataFrame.from_dict(collections.OrderedDict(
+                                                         [('nview', np.ones(len(bestIndices))),
+                                                         ('bestIndices', bestIndices), ]))
                     kmercount = kmercount.groupby('bestIndices', as_index=False).sum()
                     kmercount = kmercount.sort_values(by='nview', ascending=False)
                     with open(self.figdir + "/listkmerCluster_"+name + str(nclust)+"_nIndiv" + str(nIndiv) +"_"+ str(nbmaxkmer)+ ".fastq", "w") as file:
