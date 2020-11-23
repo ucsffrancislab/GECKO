@@ -43,8 +43,8 @@ fastqc MAY need an X11 connection even for unused window
 I added these lines to my `~/.ssh/config` for this connection
 
 ```
-	ForwardX11 yes
-	ForwardX11Trusted yes
+ForwardX11 yes
+ForwardX11Trusted yes
 ```
 
 
@@ -151,7 +151,6 @@ Edited Makefile
 make clean
 make
 cd ../../../ImportMatrix
-
 ```
 
 
@@ -200,7 +199,6 @@ mv results/discretization demo_import/
 
 
 
-
 cd ../Gecko/algoGen/Producteurv2/utils
 
 ./transformIntoBinary ../../../../ImportMatrix/demo_import/filtering/final/FILTEREDmatrix_RealCounts.matrix ../../../../ImportMatrix/demo_import/filtering/final/FILTEREDmatrix_RealCounts.bin
@@ -208,9 +206,6 @@ cd ../Gecko/algoGen/Producteurv2/utils
 mkdir ../../../../ImportMatrix/demo_import/filtering/final/CutMatrix/
 
 ./indexBinary ../../../../ImportMatrix/demo_import/filtering/final/FILTEREDmatrix_RealCounts.bin ../../../../ImportMatrix/demo_import/filtering/final/CutMatrix/example.bin 1000
-
-
-
 ```
 
 
@@ -221,8 +216,6 @@ Don't crush a shared server. Specify OMP_NUM_THREADS or all processors will be u
 
 
 ```
-
-
 cd ../..
 
 OMP_NUM_THREADS=24 ./prod_client_script_C++_V3.sh ../../Demo/configGA_microRNA_demo.conf 20
@@ -258,13 +251,17 @@ Add seaborn
 Replace ".ix" with ".iloc" or ".loc"
 
 Replace ".from_items" with ....
+```
 /c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/ClassGeneticAlgPlotter.py:481: FutureWarning: from_items is deprecated. Please use DataFrame.from_dict(dict(items), ...) instead. DataFrame.from_dict(OrderedDict(items)) may be used to preserve the key order.
+```
 
 
 
 Lowering pandas version (like had to with pyspark and MetaGO)
+```
 pip uninstall pandas
 pip install --user pandas==0.23
+```
 
 
 Undid .ix and .from_items changes
@@ -276,22 +273,28 @@ python3 has the flush=True option. python2 would need it removed and followed by
 
 
 lower sklearn to ~2 years ago (0.20.0)
+```
 pip uninstall scikit-learn
 pip install --user scikit-learn==0.23
+```
 
 WORKING!!!
 
+```
 /c4/home/gwendt/.local/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: Deprecation
 Warning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
   import imp
 no display found. Using non-interactive Agg backend
+```
 
 upgrade sklearn to newest working version?
 
 
 scikit-learn==0.20 - 
+```
 /c4/home/gwendt/.local/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
  import imp
+```
 
 scikit-learn==0.21???
 
@@ -310,6 +313,7 @@ sbatch multipleGeckoStart.py ../../Demo/configGA_microRNA_demo.conf 20
 ix and iloc are not the same IF THE INDEX IS INTEGER
 
 
+```
 import pandas as pd
 df = pd.DataFrame(dict(X=range(4),Y=range(4,4)))
 >>> df
@@ -329,11 +333,14 @@ df = pd.DataFrame(dict(X=range(4),Y=range(4,4)))
    X
 0  0
 1  1
+```
 
 
 
 
 scikit-learn 0.21 ....
+
+```
 Traceback (most recent call last):
   File "plotter_for_eachhistorylog.py", line 337, in <module>
     MLev.MLevaluation.generateNlzReportClassifierQuality( os.path.join(fi, "fig/BestIndiv10.csvforextractkm.count_SampleMat.csv"), extendsavepath="/indiv"+str(idindiv+1)+"/", nrot=0, hideNeurons=int(nbkmer/2), kmByIndiv=nbkmer, idindiv=idindiv, eliminate=False,classfierType=classfierType)
@@ -342,11 +349,14 @@ Traceback (most recent call last):
   File "/c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/MLevaluation.py", line 188, in sklearcrossval
     print("Train score mean = {}".format(np.mean(res["train_score"])))
 KeyError: 'train_score'
+```
 
 
 
 This was created in November 2018. Some newer software is proving incompatible.
+
 pandas 0.23.4
+
 scikit-learn 0.20.1
 
 
