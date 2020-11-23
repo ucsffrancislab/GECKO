@@ -32,34 +32,23 @@ Install cutadapt
 pip install --user cutadapt
 ```
 
-module load fastqc
 
-#Install fastqc
-#```
-#...
-#```
-#
-#
-#
-#fastqc needs an X11 connection even for unused window
-#I added these lines to my `~/.ssh/config` for this connection
-#
-#
-#	That's not true? when connecting to C4?
-#	I don't set the display and doesn't complain.
-#
-#```
-#	ForwardX11 yes
-#	ForwardX11Trusted yes
-#```
-#
-#
-#
-#Install fastq-dump from sra-tools
-#```
-#...
-#```
-#	Already exists by default on C4 dev or really unneeded?
+Install fastqc
+
+```
+module load fastqc
+```
+
+fastqc MAY need an X11 connection even for unused window
+I added these lines to my `~/.ssh/config` for this connection
+
+```
+	ForwardX11 yes
+	ForwardX11Trusted yes
+```
+
+
+May need to install fastq-dump from sra-tools
 
 
 Install jellyfish
@@ -318,16 +307,29 @@ cd ~/github/ucsffrancislab/GECKO/Gecko/algoGen && /bin/rm -rf __pycache__/ ../..
 sbatch multipleGeckoStart.py ../../Demo/configGA_microRNA_demo.conf 20
 ```
 
-ix and iloc are not the same
+ix and iloc are not the same IF THE INDEX IS INTEGER
 
 
+import pandas as pd
+df = pd.DataFrame(dict(X=range(4),Y=range(4,4)))
+>>> df
+   X
+0  0
+1  1
+2  2
+3  3
 >>> df.ix[0:1]
-  first_name last_name  age  preTestScore  postTestScore
-0      Jason    Miller   42             4             25
-1      Molly  Jacobson   52            24             94
+   X
+0  0
+1  1
 >>> df.iloc[0:1]
-  first_name last_name  age  preTestScore  postTestScore
-0      Jason    Miller   42             4             25
+   X
+0  0
+>>> df.loc[0:1]
+   X
+0  0
+1  1
+
 
 
 
@@ -346,6 +348,7 @@ KeyError: 'train_score'
 This was created in November 2018. Some newer software is proving incompatible.
 pandas 0.23.4
 scikit-learn 0.20.1
+
 
 
 
