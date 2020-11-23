@@ -212,7 +212,8 @@ class GeneticAlgPlotter:
         listorgawin = listorgawin.reset_index(drop=True)
         # remove identics organisms
         a=pd.DataFrame()
-        a=a.append(listorgawin.ix[0])
+        #a=a.append(listorgawin.ix[0])
+        a=a.append(listorgawin.iloc[0])
         a['nbview']=1
         ifound=0
         i=1
@@ -220,17 +221,22 @@ class GeneticAlgPlotter:
             iwinner=0
             found=0
             while (iwinner<=ifound) & (found < ifound+1):
-                res=self.comparekmlist(a.ix[iwinner,"bestIndices"],listorgawin.ix[i,"bestIndices"])
+                #res=self.comparekmlist(a.ix[iwinner,"bestIndices"],listorgawin.ix[i,"bestIndices"])
+                res=self.comparekmlist(a.iloc[iwinner]["bestIndices"],listorgawin.iloc[i]["bestIndices"])
 
                 if res == 1:
-                    a.ix[iwinner, "nbview"] += 1
+                    #a.ix[iwinner, "nbview"] += 1
+                    #a.iloc[iwinner]["nbview"] += 1
+                    a.at[iwinner, "nbview"] += 1
+                    #a["nbview",iwinner] += 1
                 else :
                     found+=1
 
                 iwinner += 1
 
             if found == ifound+1:
-                a = a.append(listorgawin.ix[i], True)
+                #a = a.append(listorgawin.ix[i], True)
+                a = a.append(listorgawin.iloc[i], True)
                 a.loc[[a.shape[0] - 1], ['nbview']] = 1
                 ifound += 1
 
@@ -951,7 +957,8 @@ class GeneticAlgPlotter:
         for i in np.arange(0,len(listorgawin)):
             commonmat[i,i]=1
             for j in np.arange(i+1, len(listorgawin)):
-                commonmat[i,j]=self.comparekmlist(listorgawin.ix[i,"bestIndices"],listorgawin.ix[j,"bestIndices"])
+                #commonmat[i,j]=self.comparekmlist(listorgawin.ix[i,"bestIndices"],listorgawin.ix[j,"bestIndices"])
+                commonmat[i,j]=self.comparekmlist(listorgawin.iloc[i,"bestIndices"],listorgawin.iloc[j,"bestIndices"])
                 commonmat[j, i]=commonmat[i,j]
         fig = plt.figure(figsize=(13, 10))
         ax = fig.add_subplot(111)
