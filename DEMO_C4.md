@@ -314,8 +314,8 @@ ix and iloc are not the same IF THE INDEX IS INTEGER
 
 
 ```
-import pandas as pd
-df = pd.DataFrame(dict(X=range(4),Y=range(4,4)))
+>>> import pandas as pd
+>>> df = pd.DataFrame(dict(X=range(4))
 >>> df
    X
 0  0
@@ -333,6 +333,17 @@ df = pd.DataFrame(dict(X=range(4),Y=range(4,4)))
    X
 0  0
 1  1
+```
+
+```
+>>> import pandas as pd
+>>> df = pd.DataFrame(dict(X=range(4),Y=range(4,8)))
+>>> df
+   X  Y
+0  0  4
+1  1  5
+2  2  6
+3  3  7
 ```
 
 
