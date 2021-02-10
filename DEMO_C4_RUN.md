@@ -1,14 +1,21 @@
-#	DEMO
+#	DEMO C4 RUN
 
 
 Now process.
 May need to load modules if in new shell environment.
 
+May need an older version of numpy
+/c4/home/gwendt/.local/lib/python3.6/site-packages/numpy/lib/function_base.py:2559: RuntimeWarning: invalid value encountered in true_divide
+  c /= stddev[:, None]
+/c4/home/gwendt/.local/lib/python3.6/site-packages/numpy/lib/function_base.py:2560: RuntimeWarning: invalid value encountered in true_divide
+  c /= stddev[None, :]
+
+
 
 
 ```
 cd ~/github/ucsffrancislab/GECKO/ImportMatrix
-/bin/rm -rf ../../Demo/DemoGeneticAlgResultDir/ slurm-?????.out GECKO_?????.* __pycache__/ plot_analysis_?????.* demo_import/
+/bin/rm -rf demo_import/ work/ results/
 
 ./main.pl decomposition --singleEnd --outdir demo_import --reads '../Demo/*fastq' --kmersize 20
 ```
@@ -25,6 +32,7 @@ Change paths in ../Demo/microRNA_demo.conf
 nextflow.config
 
 
+
 ```
 cp ../Demo/microRNA_demo.conf.example ../Demo/microRNA_demo.conf
 
@@ -32,7 +40,6 @@ cp ../Demo/microRNA_demo.conf.example ../Demo/microRNA_demo.conf
 
 ./main.pl discretization --matrix demo_import/rawimport/matrix/RAWmatrix.matrix –-outdir demo_import
 ```
-
 
 The above does not put the output in `demo_import`.
 Initially it had `-outdir` and not `--outdir`, but that wasn't the problem.
