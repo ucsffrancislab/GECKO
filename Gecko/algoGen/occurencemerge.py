@@ -87,8 +87,7 @@ def occurenMerge(pathDirectory,nbKmByRun=20,hdinmin=0.8,fileocckmers=""):
             if    nbKmByRun!= 0:
                 listoccfile = listoccfile.sort_values(by="nview", ascending = False)
                 listoccfile = listoccfile.reset_index(drop=True)
-                #listoccfile = listoccfile.ix[0:nbKmByRun-1]
-                listoccfile = listoccfile.iloc[0:nbKmByRun-1]
+                listoccfile = listoccfile.ix[0:nbKmByRun-1]
 
 
             listoccfile=listoccfile.drop('scoreCum',1)
@@ -133,8 +132,7 @@ def occurenMerge(pathDirectory,nbKmByRun=20,hdinmin=0.8,fileocckmers=""):
 
     # pppp=listoccmean.drop(["bestIndices","viewinfold"], axis=1)
     # snsheatmap = sns.heatmap(pppp.ix[0:20])
-    #snsheatmap = sns.heatmap(listoccmean.drop(["bestIndices","viewinfold"], axis=1).ix[0:40].rename(index=str, columns={"nview": "mean nview"}),cmap="jet")
-    snsheatmap = sns.heatmap(listoccmean.drop(["bestIndices","viewinfold"], axis=1).iloc[0:40].rename(index=str, columns={"nview": "mean nview"}),cmap="jet")
+    snsheatmap = sns.heatmap(listoccmean.drop(["bestIndices","viewinfold"], axis=1).ix[0:40].rename(index=str, columns={"nview": "mean nview"}),cmap="jet")
     plt.subplots_adjust(bottom=0.2)
     fig.savefig(pathDirectory +"/"+ "heatmapMergedDistrib"+str(hdinmin)+"_nbkm"+str(nbKmByRun)+ ".png")
     plt.close()
@@ -142,12 +140,10 @@ def occurenMerge(pathDirectory,nbKmByRun=20,hdinmin=0.8,fileocckmers=""):
     #box plot
     # missing zero value when not present
     fig = plt.figure(figsize=(13, 10))
-    #bplotmerged=listocc.merge(listoccmean.ix[0:39], left_on='bestIndices', right_on="bestIndices").sort_values(by="nview_y")
-    bplotmerged=listocc.merge(listoccmean.iloc[0:39], left_on='bestIndices', right_on="bestIndices").sort_values(by="nview_y")
+    bplotmerged=listocc.merge(listoccmean.ix[0:39], left_on='bestIndices', right_on="bestIndices").sort_values(by="nview_y")
     # bplotmerged=listoccmean.ix[0:40].merge(listocc, left_on='bestIndices', right_on="bestIndices")
     bplotmerged.reset_index(drop=True)
-    #ax = sns.boxplot(x="bestIndices", y="nview_x", data=bplotmerged,order=listoccmean.ix[0:40].bestIndices)
-    ax = sns.boxplot(x="bestIndices", y="nview_x", data=bplotmerged,order=listoccmean.iloc[0:40].bestIndices)
+    ax = sns.boxplot(x="bestIndices", y="nview_x", data=bplotmerged,order=listoccmean.ix[0:40].bestIndices)
     fig.savefig(pathDirectory +"/"+ "boxplotMergedDistrib"+str(hdinmin)+"_nbkm"+str(nbKmByRun)+ ".png")
     plt.close()
 
