@@ -136,6 +136,10 @@ module load mpi/openmpi-x86_64
 export PYTHONPATH=""
 ```
 
+NumPy 1.16.0 (release notes) – 14 Jan 2019. (20210213)
+
+try
+NumPy 1.15.0 (release notes) – 23 Jul 2018. (20210212b)
 
 
 ```
