@@ -90,7 +90,9 @@ process bam2fastq{
 
     output:
     file '*.fastq' into raw_reads_fastqc, raw_reads_trimgalore
-    
+
+    time '9h'
+    module 'CBI:samtools'
 
     script:
     prefix = reads.toString()
@@ -117,6 +119,9 @@ process fastqc {
     output:
     file '*_fastqc.{zip,html}' into fastqc_results
     file '.command.out' into fastqc_stdout
+
+    time '9h'
+    module 'CBI:fastqc'
 
     script:
     """
@@ -150,6 +155,10 @@ if(params.notrim){
         file '*.fq' into trimmed_reads
         file '*trimming_report.txt' into trimgalore_results
         file "*_fastqc.{zip,html}" into trimgalore_fastqc_reports
+
+
+        time '9h'
+
 
         script:
         c_r1 = params.clip_r1 > 0 ? "--clip_r1 ${params.clip_r1}" : ''
