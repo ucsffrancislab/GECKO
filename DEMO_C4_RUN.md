@@ -1,6 +1,9 @@
 #	DEMO C4 RUN
 
 
+Prep work run on a development node.
+
+
 Now process.
 May need to load modules if in new shell environment.
 
@@ -34,7 +37,7 @@ nextflow.config
 
 
 ```
-cp ../Demo/microRNA_demo.conf.example ../Demo/microRNA_demo.conf
+#cp ../Demo/microRNA_demo.conf.example ../Demo/microRNA_demo.conf
 
 ./main.pl importation --groupconfig ../Demo/microRNA_demo.conf --outdir demo_import
 
@@ -69,6 +72,11 @@ mkdir ../../../../ImportMatrix/demo_import/filtering/final/CutMatrix/
 Need to add shebang line to multipleGeckoStart.py
 Also chmod +x multipleGeckoStart.py
 
+If sbatch is run from a login node, GA_sbatch.sh will silently fail.
+Not entirely clear why, but think because something isn't loaded and not clear which just yet.
+Will investigate.
+Likely openmpi
+Also need the "SBATCH --export=NONE" line.
 
 ```
 cd ~/github/ucsffrancislab/GECKO/Gecko/algoGen
