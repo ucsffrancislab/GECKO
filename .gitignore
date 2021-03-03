@@ -41,3 +41,9 @@
 /Gecko/algoGen/__pycache__/
 /Gecko/algoGen/plot_analysis_*.err
 /Gecko/algoGen/plot_analysis_*.out
+/Gecko/algoGen/dev/
+/Gecko/algoGen/original/
+
+/CCLS/
+/Demo/configGA_microRNA_demo_test.conf
+/ImportMatrix/ccls_import/
