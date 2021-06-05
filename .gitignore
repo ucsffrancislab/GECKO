@@ -21,7 +21,6 @@
 /ImportMatrix/work/
 /Demo/*.fastq
 /Demo/DemoGeneticAlgResultDir*/
-/Demo/microRNA_demo.conf
 /Gecko/algoGen/Producteurv2/farmer2
 /Gecko/algoGen/Producteurv2/farmer2.dSYM/
 /Gecko/algoGen/Producteurv2/sampledatamat
@@ -45,5 +44,9 @@
 /Gecko/algoGen/original/
 
 /CCLS/
-/Demo/configGA_microRNA_demo_test.conf
 /ImportMatrix/ccls_import/
+/ImportMatrix/nohup.out
+/Demo/DemoGeneticAlgResultDir*
+
+/EV/GeneticAlgResultDir
+/EV/SF*.fastq.gz
