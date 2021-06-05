@@ -63,6 +63,8 @@ process discretDivide {
     output:
     file '*.matrix' into minimatrix
 
+    time '99h'
+    memory '120 GB'
 
     script:
     """
@@ -87,6 +89,8 @@ process discretApply {
     output:
     file '*.matrix' into discretizedmatrix
 
+    time '99h'
+    memory '120 GB'
 
     script:
     prefix = mms.toString()
@@ -117,6 +121,8 @@ discretizedmatrix
     output:
     file '*.matrix' into finalmatrix
 
+    time '99h'
+    memory '450 GB'
 
     script:
     """

@@ -120,7 +120,7 @@ process fastqc {
     file '*_fastqc.{zip,html}' into fastqc_results
     file '.command.out' into fastqc_stdout
 
-    time '9h'
+    time '99h'
     module 'CBI:fastqc'
 
     script:
@@ -157,7 +157,8 @@ if(params.notrim){
         file "*_fastqc.{zip,html}" into trimgalore_fastqc_reports
 
 
-        time '9h'
+        time '99h'
+        module 'CBI:fastqc'
 
 
         script:
@@ -192,6 +193,8 @@ process jellyfish {
     output:
     file '*.ojf' into jellyfish_ojf
 
+    time '99h'
+
     script:
     prefix = reads[0].toString() - ~/(.R1)?(_1)?(_R1)?(_trimmed)?(_val_1)?(\.fq)?(\.fastq)?(\.gz)?$/
     """
@@ -216,6 +219,8 @@ process extract {
 
     output:
     file '*.ojf.tab' into jellyfish_tab
+
+    time '99h'
 
     script:
     prefix = jellyin.toString()

@@ -98,6 +98,8 @@ miniconf
      output:
      file '*.matrix' into minimatrix
 
+     time '99h'
+     memory '450 GB'
 
      script:
      prefix = groupfile.toString()

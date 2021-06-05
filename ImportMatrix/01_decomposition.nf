@@ -92,6 +92,9 @@ process fastqc {
     input:
     set val(name), file(reads) from raw_reads_fastqc
 
+    time '99h'
+    module 'CBI:fastqc'
+
     output:
     file '*_fastqc.{zip,html}' into fastqc_results
     file '.command.out' into fastqc_stdout
@@ -128,6 +131,12 @@ if(params.notrim){
         file '*.fq' into trimmed_reads
         file '*trimming_report.txt' into trimgalore_results
         file "*_fastqc.{zip,html}" into trimgalore_fastqc_reports
+
+
+
+        time '99h'
+        module 'CBI:fastqc'
+
 
         script:
         c_r1 = params.clip_r1 > 0 ? "--clip_r1 ${params.clip_r1}" : ''

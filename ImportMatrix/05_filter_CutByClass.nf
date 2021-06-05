@@ -76,6 +76,9 @@ process filterDivide {
     output:
     file '*.matrix' into minimatrix
 
+    cpus '16'
+    time '299h'
+    memory '250 GB'
 
     script:
      	
@@ -107,6 +110,9 @@ process filterApply {
     output:
     file '*.matrix' into filteredmatrix
 
+    time '99h'
+    memory '250 GB'
+
 
     script:
     prefix = mms.toString()
@@ -137,6 +143,9 @@ filteredmatrix
 
     output:
     file '*.matrix' into finalmatrix
+
+    time '99h'
+    memory '250 GB'
 
 
     script:

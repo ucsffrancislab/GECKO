@@ -76,6 +76,10 @@ process toreal {
     file '*.matrix' into outpumatrix
 
 
+    time '9h'
+    memory '60 GB'
+
+
     script:
     """
     $softPath/reduct2realFile.pl $mdis $mreal > FILTEREDmatrix_RealCounts.matrix
