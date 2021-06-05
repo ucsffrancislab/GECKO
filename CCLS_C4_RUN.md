@@ -14,32 +14,40 @@ done
 done
 ```
 
+Nextflow uses a Java VM so needs to be from a non-login node ...
 
 
 ```BASH
 cd ~/github/ucsffrancislab/GECKO/ImportMatrix
-/bin/rm -rf ccls_import/ work/ results/
+#/bin/rm -rf ccls_import/ work/ results/
 
 ./main.pl decomposition --outdir ccls_import -B --reads '../CCLS/*bam' --kmersize 20 -resume
 ```
 
-Takes a while. 
+Takes quite a while. 
 
 Then cleanup.
+
 
 ```
 rm work/* -rf
 ```
 
-Change paths in ../Demo/microRNA_demo.conf
-nextflow.config
-
 
 
 ```
-#cp ../Demo/microRNA_demo.conf.example ../Demo/microRNA_demo.conf
+find ccls_import -type f -exec chmod a-w {} \;
 
-./main.pl importation --groupconfig ../Demo/microRNA_demo.conf --outdir ccls_import
+./main.pl importation --groupconfig ../CCLS/microRNA_demo.conf --outdir ccls_import -resume
+
+#	That was 2 steps and the join failed.
+#	Does not "resume" so calling explicitly on n17.
+#	We'll see if there is enough memory.
+
+#	nohup /c4/home/gwendt/github/ucsffrancislab/GECKO/ImportMatrix/bin/JoinKMers ccls_import/rawimport/matrix/RAWmatrix.matrix ccls_import/rawimport/matrix/subgroupaa.conf.matrix ccls_import/rawimport/matrix/subgroupab.conf.matrix &
+
+#	kinda worked but doesn't look right.
+#	trying again. All good now. All 10 columns.
 
 ./main.pl discretization --matrix ccls_import/rawimport/matrix/RAWmatrix.matrix –-outdir ccls_import
 ```
@@ -51,13 +59,40 @@ Not sure what's special about it.
 
 ```
 mv results/discretization ccls_import/
+```
 
-./main.pl filter --matrix ccls_import/discretization/matrix/DISCRETmatrix.matrix  --outdir ccls_import
+This takes FOREVER! Set to 299 hours and still doesn't finish.
+Only uses 1 CPU at about 15%.
 
+du -sh ccls_import/discretization/matrix/DISCRETmatrix.matrix
+102G	ccls_import/discretization/matrix/DISCRETmatrix.matrix
+
+du -sh work/
+9.2G	work/
+
+
+```
+nohup ./main.pl filter --matrix ccls_import/discretization/matrix/DISCRETmatrix.matrix  --outdir ccls_import -resume
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
 ./main.pl real --matrixDiscrete ccls_import/filtering/matrix/FILTEREDmatrix.matrix --matrixRaw ccls_import/rawimport/matrix/RAWmatrix.matrix --outdir ccls_import/
-
-
-
 
 cd ~/github/ucsffrancislab/GECKO/Gecko/algoGen/Producteurv2/utils
 
@@ -87,9 +122,5 @@ sbatch multipleGeckoStart.py ../../Demo/configGA_microRNA_demo.conf 20
 ```
 
 Job is submitted. Waiting ...
-
-
-
-
 
 
