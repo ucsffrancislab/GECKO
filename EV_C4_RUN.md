@@ -1,5 +1,17 @@
 #	EV C4 RUN
 
+ONE TIME FOR SETUP
+```
+paste <( ls -1 /c4/home/gwendt/github/ucsffrancislab/GECKO/ImportMatrix/ev_import/jellyfish/text/SFHH005?.ojf.tab && ls -1 /c4/home/gwendt/github/ucsffrancislab/GECKO/ImportMatrix/ev_import/jellyfish/text/SFHH005??.ojf.tab ) <( tail -n +2 /francislab/data1/raw/20210428-EV/metadata.csv | awk -F\" '{print $2}' ) > /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf
+
+vi /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf
+
+awk 'BEGIN{FS=OFS="\t"}{print $1,NR,$2}' /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf > tmp
+mv tmp /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf
+```
+
+metadata.conf is a GBM/nonGBM file
+
 
 Next time, try to submit these commands to the queue
 If submitting works, could set some dependencies and make this a proper script.
@@ -49,20 +61,6 @@ Then cleanup.
 rm work/* -rf
 ```
 
-
-ONE TIME FOR SETUP
-```
-paste <( ls -1 /c4/home/gwendt/github/ucsffrancislab/GECKO/ImportMatrix/ev_import/jellyfish/text/SFHH005?.ojf.tab && ls -1 /c4/home/gwendt/github/ucsffrancislab/GECKO/ImportMatrix/ev_import/jellyfish/text/SFHH005??.ojf.tab ) <( tail -n +2 /francislab/data1/raw/20210428-EV/metadata.csv | awk -F\" '{print $2}' ) > /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf
-
-vi /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf
-
-awk 'BEGIN{FS=OFS="\t"}{print $1,NR,$2}' /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf > tmp
-mv tmp /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf
-```
-
-
-
-metadata.conf is a GBM/nonGBM file
 
 
 ```
@@ -136,7 +134,10 @@ cd ~/github/ucsffrancislab/GECKO/Gecko/algoGen
 cd ~/github/ucsffrancislab/GECKO/Gecko/algoGen
 
 
-${sbatch} --job-name=multipleGeckoStart --time=999 --ntasks=8 --mem=61G --output=/c4/home/gwendt/github/ucsffrancislab/GECKO/ImportMatrix/ev_import/multipleGeckoStart.${date}.txt /c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/multipleGeckoStart.py /c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GA.conf 15
+date=$( date "+%Y%m%d%H%M%S" )
+for i in $( seq 0 9 ) ; do
+${sbatch} --job-name=${i}multipleGeckoStart --time=999 --ntasks=4 --mem=30G --output=/c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GeneticAlgResultDir${i}/multipleGeckoStart.${date}.txt /c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/multipleGeckoStart.py /c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GA${i}.conf 15
+done
 
 ```
 
