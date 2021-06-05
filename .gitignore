@@ -50,3 +50,9 @@
 
 /EV/GeneticAlgResultDir
 /EV/SF*.fastq.gz
+
+/ImportMatrix/ccls_import
+/ImportMatrix/ev_files
+/ImportMatrix/ev_import
+/ImportMatrix/results*
+/ImportMatrix/work*
