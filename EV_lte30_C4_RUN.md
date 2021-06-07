@@ -30,11 +30,11 @@ lte30 or gt30 or all ( try lte30 then do all )
 
 ```
 cd ~/github/ucsffrancislab/GECKO
-mkdir EV
+mkdir EV_lte30
 for f in /francislab/data1/working/20210428-EV/20210518-preprocessing/output/SFHH005*.cutadapt2.lte30.fastq.gz ; do
 echo $f
 base=$( basename $f .cutadapt2.lte30.fastq.gz )
-ln -s $f EV/${base}.fastq.gz
+ln -s $f EV_lte30/${base}.fastq.gz
 done
 ```
 
@@ -47,9 +47,9 @@ Nextflow uses a Java VM so needs to be from a non-login dev node ( or as a job o
 cd ~/github/ucsffrancislab/GECKO/ImportMatrix
 #/bin/rm -rf ev_import/* work/* results/*
 
-${sbatch} --job-name=decomposition --time=999 --ntasks=4 --mem=30G --output=${PWD}/ev_import/decomposition.${date}.txt ${PWD}/main.pl decomposition --singleEnd --outdir ${PWD}/ev_import --reads '/c4/home/gwendt/github/ucsffrancislab/GECKO/EV/*.fastq.gz' --kmersize 15
+${sbatch} --job-name=decomposition --time=999 --ntasks=4 --mem=30G --output=${PWD}/ev_import/decomposition.${date}.txt ${PWD}/main.pl decomposition --singleEnd --outdir ${PWD}/ev_import --reads '/c4/home/gwendt/github/ucsffrancislab/GECKO/EV_lte30/*.fastq.gz' --kmersize 15
 
-#./main.pl decomposition --singleEnd --outdir ev_import --reads '../EV/*.fastq.gz' --kmersize 15 -resume
+#./main.pl decomposition --singleEnd --outdir ev_import --reads '../EV_lte30/*.fastq.gz' --kmersize 15 -resume
 ```
 
 Can take quite a while depending on file size. 
@@ -66,7 +66,7 @@ rm work/* -rf
 ```
 find ev_import -type f -exec chmod a-w {} \;
 
-#./main.pl importation --groupconfig ../EV/metadata3.conf --outdir ev_import -resume
+#./main.pl importation --groupconfig ../EV_lte30/metadata3.conf --outdir ev_import -resume
 
 ${sbatch} --job-name=importation --time=999 --ntasks=4 --mem=30G --output=${PWD}/ev_import/importation.${date}.txt ${PWD}/main.pl importation --groupconfig /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_metadata.conf --outdir ${PWD}/ev_import
 
@@ -136,8 +136,8 @@ cd ~/github/ucsffrancislab/GECKO/Gecko/algoGen
 
 date=$( date "+%Y%m%d%H%M%S" )
 for i in $( seq 0 9 ) ; do
-#mkdir /c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GeneticAlgResult${i}Dir/
-${sbatch} --job-name=${i}multipleGeckoStart --time=999 --ntasks=4 --mem=30G --output=/c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GeneticAlgResult${i}Dir/multipleGeckoStart.${date}.txt /c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/multipleGeckoStart.py /c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GA${i}.conf 15
+#mkdir /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_lte30/GeneticAlgResult${i}Dir/
+${sbatch} --job-name=${i}multipleGeckoStart --time=999 --ntasks=4 --mem=30G --output=/c4/home/gwendt/github/ucsffrancislab/GECKO/EV_lte30/GeneticAlgResult${i}Dir/multipleGeckoStart.${date}.txt /c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/multipleGeckoStart.py /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_lte30/GA${i}.conf 15
 done
 
 ```
@@ -151,7 +151,7 @@ Job is submitted. Waiting ...
 
 ```
 
-tar cvf - EV | gzip > 20210606-EV-Gecko.tar.gz
+tar cvf - EV_lte30 | gzip > 20210606-EV_lte30-Gecko.tar.gz
 
 BOX="https://dav.box.com/dav/Francis _Lab_Share"
 

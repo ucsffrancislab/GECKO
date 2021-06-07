@@ -48,11 +48,15 @@
 /ImportMatrix/nohup.out
 /Demo/DemoGeneticAlgResult*
 
-/EV/GeneticAlgResult*
-/EV/SF*.fastq.gz
+/EV_lte30/GeneticAlgResult*
+/EV_lte30/SF*.fastq.gz
 
 /ImportMatrix/ccls_import
 /ImportMatrix/ev_files
 /ImportMatrix/ev_import
+/ImportMatrix/ev_lte30_import
 /ImportMatrix/results*
 /ImportMatrix/work*
+
+/20210606-EV-Gecko.tar.gz
+
