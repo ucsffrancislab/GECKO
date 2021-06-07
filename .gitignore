@@ -46,9 +46,9 @@
 /CCLS/
 /ImportMatrix/ccls_import/
 /ImportMatrix/nohup.out
-/Demo/DemoGeneticAlgResultDir*
+/Demo/DemoGeneticAlgResult*
 
-/EV/GeneticAlgResultDir*
+/EV/GeneticAlgResult*
 /EV/SF*.fastq.gz
 
 /ImportMatrix/ccls_import

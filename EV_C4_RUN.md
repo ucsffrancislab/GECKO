@@ -136,11 +136,26 @@ cd ~/github/ucsffrancislab/GECKO/Gecko/algoGen
 
 date=$( date "+%Y%m%d%H%M%S" )
 for i in $( seq 0 9 ) ; do
-${sbatch} --job-name=${i}multipleGeckoStart --time=999 --ntasks=4 --mem=30G --output=/c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GeneticAlgResultDir${i}/multipleGeckoStart.${date}.txt /c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/multipleGeckoStart.py /c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GA${i}.conf 15
+#mkdir /c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GeneticAlgResult${i}Dir/
+${sbatch} --job-name=${i}multipleGeckoStart --time=999 --ntasks=4 --mem=30G --output=/c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GeneticAlgResult${i}Dir/multipleGeckoStart.${date}.txt /c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/multipleGeckoStart.py /c4/home/gwendt/github/ucsffrancislab/GECKO/EV/GA${i}.conf 15
 done
 
 ```
 
 Job is submitted. Waiting ...
+
+
+
+
+
+
+```
+
+tar cvf - EV | gzip > 20210606-EV-Gecko.tar.gz
+
+BOX="https://dav.box.com/dav/Francis _Lab_Share"
+
+curl -netrc -T 20210606-EV-Gecko.tar.gz "${BOX}/"
+```
 
 
