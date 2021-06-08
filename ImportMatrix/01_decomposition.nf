@@ -171,6 +171,8 @@ process jellyfish {
     input:
     file reads from trimmed_reads
 
+    time '99h'
+
     output:
     file '*.ojf' into jellyfish_ojf
 
@@ -195,6 +197,8 @@ process extract {
 
     input:
     file jellyin from jellyfish_ojf
+
+    time '99h'
 
     output:
     file '*.ojf.tab' into jellyfish_tab

@@ -48,6 +48,8 @@
 /ImportMatrix/nohup.out
 /Demo/DemoGeneticAlgResult*
 
+/EV/GeneticAlgResult*
+/EV/SF*.fastq.gz
 /EV_lte30/GeneticAlgResult*
 /EV_lte30/SF*.fastq.gz
 

@@ -66,11 +66,13 @@ process rawsubextract {
     input:
     file groupfile from groupconfigfile
 
+    time '9h'
+
     output:
     file '*.conf' into miniconf
 
 
-		// Need a newer version to handle the --additional-suffix option
+    // Need a newer version to handle the --additional-suffix option
     ///home/gwendt/.sources/coreutils-8.32/src/split -l 5 --additional-suffix=.conf $groupfile subgroup
     script:
     """
