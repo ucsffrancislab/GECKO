@@ -3,10 +3,10 @@
 DO NOT USE --export=None with sbatch HERE. IT WILL FAIL.
 
 export sbatch="sbatch --mail-user=George.Wendt@ucsf.edu --mail-type=FAIL "
-
 export GECKO=/c4/home/gwendt/github/ucsffrancislab/GECKO
 export GDATA=${GECKO}/ImportMatrix/ev_IDHWT_import
 export k=15
+date=$( date "+%Y%m%d%H%M%S" )
 
 
 
@@ -78,24 +78,10 @@ rm work/* -rf
 
 
 ```
+cd ${GECKO}/ImportMatrix
 find ev_IDHWT_import -type f -exec chmod a-w {} \;
 
 ${sbatch} --job-name=importation --time=9999 --ntasks=4 --mem=30G --output=${GDATA}/importation.${date}.txt ${GECKO}/ImportMatrix/main.pl importation --groupconfig ${GECKO}/EV_IDHWT_metadata.conf --outdir ${GDATA}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ${sbatch} --job-name=discretization --time=9999 --ntasks=4 --mem=30G --output=${GDATA}/discretization.${date}.txt ${GECKO}/ImportMatrix/main.pl discretization --matrix ${GDATA}/rawimport/matrix/RAWmatrix.matrix –-outdir ${GDATA}
 ```
@@ -108,7 +94,7 @@ This next step (filter) can take days depending on data size so ALWAYS run with 
 
 
 ```
-mv results/discretization ev_IDHWT_import/
+mv ${GECKO}/ImportMatrix/results/discretization ${GDATA}/
 
 ${sbatch} --job-name=filter --time=9999 --ntasks=8 --mem=61G --output=${GDATA}/filter.${date}.txt ${GECKO}/ImportMatrix/main.pl filter --matrix ${GDATA}/discretization/matrix/DISCRETmatrix.matrix --outdir ${GDATA}
 
@@ -131,8 +117,9 @@ ${sbatch} --job-name=indexBinary --time=999 --ntasks=8 --mem=61G --output=${GDAT
 ```
 cd ${GECKO}/Gecko/algoGen
 
-/bin/rm -rf ../../Demo/DemoGeneticAlgResultDir/ slurm-?????.out GECKO_?????.* __pycache__/ plot_analysis_?????.* 
+/bin/rm -rf ../../Demo/DemoGeneticAlgResultDir/ slurm-*.out GECKO_*.* __pycache__/ plot_analysis_*.* 
 
+find ${GDATA}/ -type f -exec chmod a-w {} \;
 
 
 cd ${GECKO}/Gecko/algoGen
@@ -168,12 +155,11 @@ done
 
 
 ```
-
-tar cvf - EV| gzip > 20210606-EV-Gecko.tar.gz
+tar cvf - /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT | gzip > 20210615-EV_IDHWT-Gecko.tar.gz
 
 BOX="https://dav.box.com/dav/Francis _Lab_Share"
 
-curl -netrc -T 20210606-EV-Gecko.tar.gz "${BOX}/"
+curl -netrc -T 20210615-EV_IDHWT-Gecko.tar.gz "${BOX}/"
 ```
 
 
