@@ -139,27 +139,38 @@ Job is submitted. Waiting ...
 If running many, wrap it in a loop.
 
 ```
+
+
+cd ${GECKO}/Gecko/algoGen
+
 date=$( date "+%Y%m%d%H%M%S" )
-for i in $( seq 0 9 ) ; do
-mkdir /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV/GeneticAlgResult${i}Dir
-ln -s /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV/GeneticAlgResult${i}Dir ${GECKO}/EV/
-${sbatch} --job-name=${i}multipleGeckoStart --time=999 --ntasks=4 --mem=30G --output=${GECKO}/EV/GeneticAlgResult${i}Dir/multipleGeckoStart.${date}.txt ${GECKO}/Gecko/algoGen/multipleGeckoStart.py ${GECKO}/EV/GA${i}.conf ${k}
-done
+#for i in $( seq 0 9 ) ; do
+
+i=4
+mkdir /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT/GeneticAlgResult${i}Dir
+ln -s /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT/GeneticAlgResult${i}Dir ${GECKO}/EV_IDHWT/
+
+cp ${GECKO}/EV_IDHWT/GA.conf ${GECKO}/EV_IDHWT/GA${i}.conf
+vi ${GECKO}/EV_IDHWT/GA${i}.conf
+
+${sbatch} --job-name=${i}multipleGeckoStart --time=999 --ntasks=4 --mem=30G --output=${GECKO}/EV_IDHWT/GeneticAlgResult${i}Dir/multipleGeckoStart.${date}.txt ${GECKO}/Gecko/algoGen/multipleGeckoStart.py ${GECKO}/EV_IDHWT/GA${i}.conf ${k}
+
+#done
 
 ```
 
 
 
-
-
-
-
 ```
-tar cvf - /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT | gzip > 20210615-EV_IDHWT-Gecko.tar.gz
+tar --directory /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/ cvf - /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT | gzip > 20210615-EV_IDHWT-Gecko.tar.gz
+
+tar -cv --directory /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/ -f - EV_IDHWT | gzip > 20210615-EV_IDHWT-Gecko.tar.gz
+
+
+
+tar -cv --directory /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/ -f - EV_IDHWT/GeneticAlgResult4Dir | gzip > 20210616-EV_IDHWT-Gecko.tar.gz
 
 BOX="https://dav.box.com/dav/Francis _Lab_Share"
 
-curl -netrc -T 20210615-EV_IDHWT-Gecko.tar.gz "${BOX}/"
+curl -netrc -T 20210616-EV_IDHWT-Gecko.tar.gz "${BOX}/"
 ```
-
-
