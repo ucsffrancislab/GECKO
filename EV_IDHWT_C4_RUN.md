@@ -146,7 +146,7 @@ cd ${GECKO}/Gecko/algoGen
 date=$( date "+%Y%m%d%H%M%S" )
 #for i in $( seq 0 9 ) ; do
 
-i=4
+i=5
 mkdir /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT/GeneticAlgResult${i}Dir
 ln -s /francislab/data1/users/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT/GeneticAlgResult${i}Dir ${GECKO}/EV_IDHWT/
 

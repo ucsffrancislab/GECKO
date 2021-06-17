@@ -477,8 +477,27 @@ class GeneticAlgPlotter:
 
         df = self.data[(self.data.scoreHDin >= hdinmin )]
 
-        aa = df['bestSequences'].to_csv(sep=str(u','), index=False)
+        #print("JAKE df head")
+        #print(df.head())
+
+        #print("JAKE df columns")
+        #print(df.columns)
+
+        #print("JAKE df['bestSequences'].head()")
+        #print(df['bestSequences'].head())
+        
+        #aa = df['bestSequences'].to_csv(sep=str(u','), index=False)
+        aa = df['bestSequences'].to_csv(sep=str(u','), index=False, header=False)
+        #print("JAKE : bestSequences aa1 :",aa[0:100],":")
         aa = aa.replace('\"\n\"', ',').replace('\"', '').replace('\n', '')
+        #print("JAKE : bestSequences aa2 :",aa[0:100],":")
+
+        #  I don't see why this wouldn't have happened before? bestSequences is attached to the data.
+        # perhaps older versions of python did not include the header by default.
+        #JAKE : bestSequences aa : bestSequences2132266,255848643,9079806,52238261,976178520,479840088,279969920,508176277,152489119,528868497,241936103,839243293,145358912,50817
+        #aa = aa.replace('bestSequences', '')
+        #print("JAKE : bestSequences aa3 :",aa[0:100],":")
+
         if len(aa)>1:
             bestIndices = aa.split(',')
             nbkmer=len(df.iloc[0]['bestSequences'].split(','))
@@ -488,6 +507,8 @@ class GeneticAlgPlotter:
             kmercount = pd.DataFrame.from_dict(collections.OrderedDict(
                                                  [('nview', np.ones(len(bestIndices))),
                                                  ('bestIndices', bestIndices),('scoreCum', scoresindiv)]))
+            #print("JAKE kmercount 1a")
+            #print(kmercount.head())
 
 
             kmercount=kmercount.groupby('bestIndices', as_index=False).sum()
@@ -497,6 +518,9 @@ class GeneticAlgPlotter:
             kmercount = pd.DataFrame.from_dict(collections.OrderedDict(
                                                  [('nview', []),
                                          ('bestIndices', []), ('scoreCum', [])]))
+        #print("JAKE kmercount 1b")
+        #print(kmercount.head())
+
 
         return kmercount
 
@@ -717,10 +741,38 @@ class GeneticAlgPlotter:
                 [bins, edges] = np.histogram(tmp, np.arange(1, np.max(tmp) + 1, 1))
                 edges = edges[1:]
                 dedges = edges[:-1]
+                print("JAKE : bins")
+                print(bins)
                 dbins = np.diff(bins)
                 plt.plot(dedges, dbins)
                 ax2 = fig.add_subplot(212)
                 plt.plot(edges, bins)
+                print("JAKE : dbins")
+                print(dbins)
+                # it looks like dbins is occasionally empty. Does it matter in the end?
+                # 
+                # test.overallHistokmerlist(winneronly=True,nbmaxkmer=nbmaxkm,hdinmin=0.8)
+                # JAKE : bins
+                # [109]
+                # JAKE : dbins
+                # []
+                # Traceback (most recent call last):
+                #   File "plot4folder.py", line 55, in <module>
+                #     test.overallHistokmerlist(winneronly=True,nbmaxkmer=nbmaxkm,hdinmin=0.8)
+                #   File "/c4/home/gwendt/github/ucsffrancislab/GECKO/Gecko/algoGen/ClassGeneticAlgPlotter.py", line 752, in overallHistokmerlist
+                #     cutat = np.min(dbins) * 0.005
+                #   File "<__array_function__ internals>", line 6, in amin
+                #   File "/c4/home/gwendt/.local/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 2831, in amin
+                #     keepdims=keepdims, initial=initial, where=where)
+                #   File "/c4/home/gwendt/.local/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 87, in _wrapreduction
+                #     return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+                # ValueError: zero-size array to reduction operation minimum which has no identity
+                # python3 plot4folder.py /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT/GeneticAlgResult4Dir/0_2/ 10 5000 15
+                # no display found. Using non-interactive Agg backend
+                # ClassGeneticAlgPlotter :
+                # /c4/home/gwendt/github/ucsffrancislab/GECKO/EV_IDHWT/GeneticAlgResult4Dir/0_2/
+
+
                 cutat = np.min(dbins) * 0.005
                 ll = np.argmax(np.array(dbins > cutat))
                 startkeep = dedges[ll]
@@ -808,11 +860,25 @@ class GeneticAlgPlotter:
 
         '''
 
+        #print("JAKE kmercount.head 2")
+        #print(kmercount.head())
+
         listbestidkmer=[]
         with open(self.figdir+"listkmer"+win+str(hdinmin)+".fastq", "w") as file:
             with open(self.figdir + "countkmer" + win + str(hdinmin) + ".txt", "w") as filecount:
 
+                print("JAKE : min(nbmaxkmer,kmercount.shape[0])")
+                print(nbmaxkmer)
+                print(kmercount.shape[0])
+                print(min(nbmaxkmer,kmercount.shape[0]))
+
                 for i in range(0, min(nbmaxkmer,kmercount.shape[0])):
+
+                    #print("JAKE : i :",i,":") 
+                    #print("JAKE : kmercount['nview'].values[i]: ", kmercount["nview"].values[i],":") 
+                    #print("JAKE : kmercount['kmer'].values[i]: ", kmercount["kmer"].values[i],":") 
+                    #print("JAKE : ") 
+
                     #kmercount["nview"].values[i]
 
                    # print(i, " : ", kmercount["nview"].values[i], " = ",idseq2fasta(int(kmercount["kmer"].values[i]), 30))  # ,kmercount["kmer"].values[i]," : ",

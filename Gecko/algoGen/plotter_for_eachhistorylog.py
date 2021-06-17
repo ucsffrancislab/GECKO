@@ -246,10 +246,20 @@ for fi in listdir:
 
 
 
+#	JAKE - this command can get too long. 250,000 characters is too long. 84,000 is ok.
+#	the command will then silently fail and everything after it will fail.
+
 commandclient = "./Producteurv2/sampledatamat " +file_csv+" "+ parmafile + " 0"
 print(commandclient, flush=True)
+
+print("JAKE : len(commandclient)")
+print(len(commandclient))
+print("", flush=True)	#	so it prints before running the command
+
 if test3_sampledatamat == False:
-   os.system(commandclient)
+   os_return_value=os.system(commandclient)
+   print("JAKE : os_return_value")
+   print(os_return_value)
 else :
     print("NOT start test mode activate\n")
 
