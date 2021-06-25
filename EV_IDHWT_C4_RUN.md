@@ -111,6 +111,7 @@ mkdir ${GDATA}/filtering/final/CutMatrix/
 ${sbatch} --job-name=indexBinary --time=999 --ntasks=8 --mem=61G --output=${GDATA}/indexBinary.${date}.txt --wrap="${GECKO}/Gecko/algoGen/Producteurv2/utils/indexBinary ${GDATA}/filtering/final/FILTEREDmatrix_RealCounts.bin ${GDATA}/filtering/final/CutMatrix/example.bin 1000"
 ```
 
+Not sure that that final step of indexBinary is really necessary.
 
 
 
