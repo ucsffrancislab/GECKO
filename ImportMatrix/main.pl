@@ -130,6 +130,7 @@ if($parameters{'function'} eq "importation"){
 
         # initial importation
         my $command = "./nextflow run 02_importation.nf --groupconfig \'".$parameters{'groupconfig'}."\' --outdir \'".$parameters{'outdir'}."\'"." ".$parameters{'resume'};
+        print $command,"\n";
         system($command) == 0
             or die "system failed: $?";
         my $directoryMatrix = $parameters{'outdir'}."/rawimport/matrix";
@@ -172,17 +173,20 @@ if($parameters{'function'} eq "importation"){
                     $file1=~s/subgroup//;$file1=~s/.conf.matrix//;
                     my $newfile = "subgroup".$file1.$file1.".conf.matrix";
                     $command = "cp $directoryMatrix"."/".$list_matrix_Sorted[$i]." $directoryMatrix"."/".$newfile;
+                    print $command,"\n";
                     system($command);
                 }
             }
             close(OUT);
 
             $command = "./nextflow run 03_Join.nf --listParams \'".$listingparameters."\' --outdir \'".$parameters{'outdir'}."\'";
+                    print $command,"\n";
             system($command) == 0
                 or die "system failed: $?";
 
             foreach my $elt (@list_matrix){
                 $command = "rm $directoryMatrix"."/".$elt;
+                    print $command,"\n";
                 system($command);
             }
 
@@ -193,6 +197,7 @@ if($parameters{'function'} eq "importation"){
 
         my $newfile = $directoryMatrix."/RAWmatrix.matrix";
         $command = "mv ".$list_matrix[0]." $newfile";
+                    print $command,"\n";
         system($command);
 
 
@@ -213,6 +218,7 @@ if($parameters{'function'} eq "anova"){
     if(exists $parameters{'matrix'}){
         # initial importation
         my $command = "./nextflow run 04_anova.nf --matrix \'".$parameters{'matrix'}."\' --outdir \'".$parameters{'outdir'}."\'"." --threshold \'".$parameters{'threshold'}."\'"." ".$parameters{'resume'};
+                    print $command,"\n";
         system($command) == 0
             or die "system failed: $?";
 
@@ -225,6 +231,7 @@ if($parameters{'function'} eq "discretization"){
     if(exists $parameters{'matrix'}){
         # initial importation
         my $command = "./nextflow run 04_discretization.nf --matrix \'".$parameters{'matrix'}."\' --outdir \'".$parameters{'outdir'}."\'"." ".$parameters{'resume'};
+                    print $command,"\n";
         system($command) == 0
             or die "system failed: $?";
 
@@ -260,6 +267,7 @@ if($parameters{'function'} eq "filter"){
 
         # initial importation
 	my $command = "./nextflow run 05_filter_CutByClass.nf --matrix \'".$parameters{'matrix'}."\' --filter $selectedvalue --outdir \'".$parameters{'outdir'}."\'"." ".$parameters{'resume'};
+                    print $command,"\n";
         system($command) == 0
             or die "system failed: $?";
     }
@@ -272,6 +280,7 @@ if($parameters{'function'} eq "filter"){
 if($parameters{'function'} eq "real"){
      if(exists $parameters{'matrixDiscrete'} and exists $parameters{'matrixRaw'}){
         my $command = "./nextflow run 06_toreal.nf --matrixDiscrete \'".$parameters{'matrixDiscrete'}."\' --matrixReal \'".$parameters{'matrixRaw'}."\' --outdir \'".$parameters{'outdir'}."\'"." ".$parameters{'resume'};
+                    print $command,"\n";
         system($command) == 0
             or die "system failed: $?";
      }
