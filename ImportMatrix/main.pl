@@ -180,7 +180,7 @@ if($parameters{'function'} eq "importation"){
             close(OUT);
 
             $command = "./nextflow run 03_Join.nf --listParams \'".$listingparameters."\' --outdir \'".$parameters{'outdir'}."\'";
-                    print $command,"\n";
+            print $command,"\n";
             system($command) == 0
                 or die "system failed: $?";
 
