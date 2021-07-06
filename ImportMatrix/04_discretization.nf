@@ -124,6 +124,8 @@ discretizedmatrix
     time '99h'
     memory '450 GB'
 
+
+    // JAKE - I think that this is wrong. Results always end up in /results/ and not in the given outdir.
     script:
     """
     $softPath/joinMatrixByLine.pl $dms > DISCRETmatrix.matrix

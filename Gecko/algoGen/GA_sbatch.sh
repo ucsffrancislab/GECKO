@@ -12,9 +12,13 @@
 #module load mpi/openmpi-2.1.2
 #module load system/Python-3.6.3
 
+#module load WitteLab python3/3.9.1
+
+python3 -m pip show scikit-learn
+
 export OMP_NUM_THREADS=$SLURM_NTASKS
 echo $1 $2 $3
 
-sh prod_client_script_C++_V3.sh $1  > $2  2>&1
+sh prod_client_script_C++_V3.sh $1 > $2 2>&1
 
 

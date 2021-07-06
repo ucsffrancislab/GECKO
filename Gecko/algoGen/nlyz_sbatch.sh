@@ -11,7 +11,11 @@
 
 #module load system/Python-3.6.3
 
-echo $1 , $2, $3 ,$4 ,$5
+#module load WitteLab python3/3.9.1
 
-python3 plotter_for_eachhistorylog.py $1 $2 $3 $4 $5 $6 >$1/nlyzlog  2>&1
+python3 -m pip show scikit-learn
+
+echo $1, $2, $3, $4, $5
+
+python3 plotter_for_eachhistorylog.py $1 $2 $3 $4 $5 $6 > $1/nlyzlog 2>&1
 
